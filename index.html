@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trekoit Music | Мир музыки для вас</title>
+    <style>
+        :root {
+            --primary: #6a11cb;
+            --secondary: #2575fc;
+            --accent: #ff6b6b;
+            --dark: #121212;
+            --light: #f8f9fa;
+            --gray: #2d2d2d;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--dark), var(--gray));
+            color: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        header {
+            background: rgba(18, 18, 18, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 0;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 1px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 2rem;
+        }
+        
+        nav ul li a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        nav ul li a:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            transition: width 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--accent);
+        }
+        
+        nav ul li a:hover:after {
+            width: 100%;
+        }
+        
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 80px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%236a11cb" fill-opacity="0.2" d="M0,128L48,117.3C96,107,192,85,288,112C384,139,480,213,576,218.7C672,224,768,160,864,138.7C960,117,1056,139,1152,149.3C1248,160,1344,160,1392,160L1440,160L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path></svg>') no-repeat bottom;
+            background-size: cover;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            text-align: center;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: #d0d0d0;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-decoration: none;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        section {
+            padding: 5rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+        
+        .section-title p {
+            color: #b0b0b0;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .about-text h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+        }
+        
+        .about-text p {
+            margin-bottom: 1.5rem;
+            color: #d0d0d0;
+        }
+        
+        .about-image {
+            position: relative;
+        }
+        
+        .about-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .features {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 5rem 0;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            background: rgba(45, 45, 45, 0.5);
+            padding: 2rem;
+            border-radius: 10px;
+            transition: transform 0.3s;
+            text-align: center;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            background: linear-gradient(135deg, rgba(106, 17, 203, 0.2), rgba(37, 117, 252, 0.2));
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        
+        .feature-card p {
+            color: #b0b0b0;
+        }
+        
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+        
+        .article-card {
+            background: var(--gray);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+        
+        .article-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .article-image {
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: white;
+        }
+        
+        .article-content {
+            padding: 1.5rem;
+        }
+        
+        .article-content h3 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        
+        .article-content p {
+            color: #b0b0b0;
+            margin-bottom: 1.5rem;
+        }
+        
+        .read-more {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+        }
+        
+        .read-more:hover {
+            text-decoration: underline;
+        }
+        
+        .community {
+            text-align: center;
+            background: linear-gradient(135deg, rgba(106, 17, 203, 0.1), rgba(37, 117, 252, 0.1));
+            padding: 5rem 0;
+        }
+        
+        .community h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .community p {
+            max-width: 700px;
+            margin: 0 auto 2.5rem;
+            color: #d0d0d0;
+        }
+        
+        footer {
+            background: var(--dark);
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-links a {
+            color: #b0b0b0;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+        
+        .copyright {
+            color: #777;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+            }
+            
+            nav ul {
+                margin-top: 1.5rem;
+            }
+            
+            nav ul li {
+                margin: 0 0.5rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">Trekoit</div>
+                <nav>
+                    <ul>
+                        <li><a href="#home">Главная</a></li>
+                        <li><a href="#about">О нас</a></li>
+                        <li><a href="#features">Особенности</a></li>
+                        <li><a href="#articles">Статьи</a></li>
+                        <li><a href="#community">Сообщество</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Добро пожаловать в мир музыки</h1>
+                <p>Trekoit - это платформа, где музыка оживает. Откройте для себя новые треки, погрузитесь в историю музыки и присоединитесь к сообществу настоящих ценителей.</p>
+                <a href="#community" class="btn">Присоединиться</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>О Trekoit Music</h2>
+                <p>Узнайте больше о нашей миссии и философии</p>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Наша история</h3>
+                    <p>Trekoit Music был основан в 2018 году группой энтузиастов, которые верили, что музыка объединяет людей. Наша цель - создавать пространство, где каждый может найти музыку по душе, открыть для себя новые жанры и погрузиться в мир звуков.</p>
+                    <p>За годы работы мы собрали огромную библиотеку треков, статей и материалов о музыке со всего мира. Наша команда экспертов постоянно работает над тем, чтобы предоставлять вам самый качественный контент.</p>
+                    <p>Мы верим, что музыка - это универсальный язык, который способен преодолевать границы и культурные различия. Наша миссия - делать мир музыки доступным для каждого.</p>
+                </div>
+                <div class="about-image">
+                    <div style="background:linear-gradient(45deg, #6a11cb, #2575fc); height: 300px; border-radius: 10px; display: flex; align-items: center; justify-content: center;">
+                        <span style="color: white; font-size: 3rem;">♪ Trekoit ♪</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Наши особенности</h2>
+                <p>Почему тысячи meloman выбирают Trekoit</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">♬</div>
+                    <h3>Огромная библиотека</h3>
+                    <p>Более 10 миллионов треков различных жанров и направлений от классики до современной электронной музыки.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">★</div>
+                    <h3>Персонализация</h3>
+                    <p>Умные алгоритмы подберут музыку specifically под ваш вкус и настроение.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">✭</div>
+                    <h3>Высокое качество</h3>
+                    <p>Все треки доступны в высоком качестве, включая форматы FLAC и HD Audio.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">◷</div>
+                    <h3>Оффлайн прослушивание</h3>
+                    <p>Скачивайте любимые треки и слушайте их даже без подключения к интернету.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">☊</div>
+                    <h3>Эксклюзивные подкасты</h3>
+                    <p>Доступ к эксклюзивным интервью с музыкантами и тематическим подкастам.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">♩</div>
+                    <h3>Музыкальная теория</h3>
+                    <p>Образовательные материалы по теории музыки, истории жанров и искусству звукозаписи.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="articles">
+        <div class="container">
+            <div class="section-title">
+                <h2>Полезные статьи</h2>
+                <p>Углубите свои знания о музыке</p>
+            </div>
+            <div class="articles-grid">
+                <div class="article-card">
+                    <div class="article-image">🎸</div>
+                    <div class="article-content">
+                        <h3>История рок-музыки: от истоков до наших дней</h3>
+                        <p>Исследуйте эволюцию рок-музыки от блюзовых корней до современных поджанров. Узнайте о ключевых исполнителях и альбомах, которые определили звучание целых поколений.</p>
+                        <a href="#" class="read-more">Читать далее</a>
+                    </div>
+                </div>
+                <div class="article-card">
+                    <div class="article-image">🎹</div>
+                    <div class="article-content">
+                        <h3>Как создается электронная музыка: руководство для начинающих</h3>
+                        <p>Подробное руководство по производству электронной музыки: от выбора оборудования до сведения и мастеринга. Советы от профессиональных продюсеров.</p>
+                        <a href="#" class="read-more">Читать далее</a>
+                    </div>
+                </div>
+                <div class="article-card">
+                    <div class="article-image">🎤</div>
+                    <div class="article-content">
+                        <h3>10 вокальных техник, которые улучшат ваше пение</h3>
+                        <p>Профессиональные советы по развитию вокальных навыков. Упражнения для диапазона, контроля дыхания и улучшения тембра вашего голоса.</p>
+                        <a href="#" class="read-more">Читать далее</a>
+                    </div>
+                </div>
+                <div class="article-card">
+                    <div class="article-image">🎧</div>
+                    <div class="article-content">
+                        <h3>Как правильно выбирать наушники для музыки</h3>
+                        <p>Полное руководство по выбору наушников: от типов акустического оформления до частотных характеристик. Как найти идеальную пару для вашего стиля прослушивания.</p>
+                        <a href="#" class="read-more">Читать далее</a>
+                    </div>
+                </div>
+                <div class="article-card">
+                    <div class="article-image">🎼</div>
+                    <div class="article-content">
+                        <h3>Чтение нотной грамоты: с чего начать</h3>
+                        <p>Пошаговое руководство для тех, кто хочет научиться читать ноты. От основ музыкальной нотации до сложных ритмических patterns.</p>
+                        <a href="#" class="read-more">Читать далее</a>
+                    </div>
+                </div>
+                <div class="article-card">
+                    <div class="article-image">📀</div>
+                    <div class="article-content">
+                        <h3>Винтажные аудиоформаты: ностальгия по аналоговому звуку</h3>
+                        <p>Путешествие в мир виниловых пластинок, кассет и других аналоговых форматов. Почему аналоговый звук до сих пор ценится аудиофилами.</p>
+                        <a href="#" class="read-more">Читать далее</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="community" id="community">
+        <div class="container">
+            <h2>Присоединяйтесь к нашему сообществу</h2>
+            <p>Станьте частью растущего сообщества Trekoit. Обсуждайте музыку, делитесь плейлистами, находите единомышленников и участвуйте в эксклюзивных мероприятиях.</p>
+            <a href="#" class="btn">Зарегистрироваться</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">Trekoit</div>
+                <div class="footer-links">
+                    <a href="#">Главная</a>
+                    <a href="#">О нас</a>
+                    <a href="#">Особенности</a>
+                    <a href="#">Статьи</a>
+                    <a href="#">Сообщество</a>
+                    <a href="#">Контакты</a>
+                </div>
+                <p class="copyright">© 2023 Trekoit Music. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
